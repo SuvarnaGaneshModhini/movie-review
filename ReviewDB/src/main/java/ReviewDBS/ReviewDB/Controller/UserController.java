@@ -33,6 +33,7 @@ public class UserController {
     public CsrfToken getCsrfToken(HttpServletRequest hsr){
         return (CsrfToken)hsr.getAttribute("_csrf");
     }
+
 }
 
 

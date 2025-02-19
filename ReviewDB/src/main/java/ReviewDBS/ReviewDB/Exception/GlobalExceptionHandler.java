@@ -18,4 +18,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleMovieNotFoundException(ReviewNotFound ex1) {
         return new ResponseEntity<>(ex1.getMessage(), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(UserNotFound.class)
+    public ResponseEntity<String> handleMovieNotFoundException(UserNotFound ex2) {
+        return new ResponseEntity<>(ex2.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
 }

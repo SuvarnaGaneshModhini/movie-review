@@ -33,7 +33,7 @@ public class ReviewServiceImp implements ReviewInterface {
 
     @Override
     public Review create(Review review) {
-      return reviewRepo.save(review);
+        return reviewRepo.save(review);
 
     }
 
@@ -46,18 +46,18 @@ public class ReviewServiceImp implements ReviewInterface {
     @Override
     public Review getbyid(Long id) {
 
-        return reviewRepo.findById(id).orElseThrow(()-> new ReviewNotFound("Review not found by this id"+id));
+        return reviewRepo.findById(id).orElseThrow(() -> new ReviewNotFound("Review not found by this id" + id));
 
     }
 
     @Override
     public Review update(Review review, Long id) {
-      Review rev=  reviewRepo.findById(id).orElseThrow(()-> new ReviewNotFound("Review not found by this id"+id));
+        Review rev = reviewRepo.findById(id).orElseThrow(() -> new ReviewNotFound("Review not found by this id" + id));
 
-      rev.setMovieName(review.getMovieName());
-      rev.setRating(review.getRating());
-      rev.setReviewerName(review.getReviewerName());
-      rev.setReviewText(review.getReviewText());
+        rev.setMovieName(review.getMovieName());
+        rev.setRating(review.getRating());
+        rev.setReviewerName(review.getReviewerName());
+        rev.setReviewText(review.getReviewText());
 
         return reviewRepo.save(rev);
     }
@@ -71,9 +71,8 @@ public class ReviewServiceImp implements ReviewInterface {
 
     @Override
     public ResponseEntity<String> addReview(Long userId, Long movieId, ReviewDto reviewDto) {
-        // todo
-        User user = userRepo.findById(userId).orElseThrow(()-> new UserNotFound("User Not found"));
-        Movie movie = movieRepo.findById(movieId).orElseThrow(()-> new UserNotFound("Movie Not found"));
+        User user = userRepo.findById(userId).orElseThrow(() -> new UserNotFound("User Not found"));
+        Movie movie = movieRepo.findById(movieId).orElseThrow(() -> new UserNotFound("Movie Not found"));
         Review review = new Review();
         review.setMovieName(reviewDto.getMovieName());
         review.setReviewText(reviewDto.getReviewText());
@@ -87,9 +86,4 @@ public class ReviewServiceImp implements ReviewInterface {
 
         return ResponseEntity.ok("Review Submited Successfully");
     }
-//
-//    @Override
-//    public List<Review> postdata(List<Review> reviews) {
-//        return reviewRepo.saveAll(reviews);
-//    }
 }
