@@ -32,11 +32,14 @@ public class UserServiceImp  implements UserInterface {
     }
 
     @Override
-    public ResponseEntity<String> login(LoginDto loginDTO) {
+    public ResponseEntity<String> login(LoginDto loginDTO) throws UserNotFound {
         List<User> listUser = userRepo.findAll();
         for(User usr: listUser) System.out.println(usr);
 
-       User user =  userRepo.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new UserNotFound("email doesn't exists"));
+       User user =  userRepo.findByEmail(loginDTO.getEmail());
+       if(user == null){
+           throw new UserNotFound("User Not found!!");
+       }
        if(user.getPassword().equals(loginDTO.getPassword())) return ResponseEntity.ok("Login Successfull");
        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Password");
     }

@@ -1,10 +1,10 @@
 package ReviewDBS.ReviewDB.Entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Movie {
@@ -15,6 +15,12 @@ public class Movie {
     private String title;
     private String genre;
     private String director;
+
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL ,orphanRemoval = true )       //used in JPA to automatically remove child entities when they are no longer referenced by the parent. It applies to OneToOne and OneToMany relationships.
+    private List<Review> reviews = new ArrayList<>();
+
+
 
     //  Reviews Here....
 

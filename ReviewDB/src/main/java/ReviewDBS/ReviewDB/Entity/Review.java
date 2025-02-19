@@ -1,11 +1,8 @@
 package ReviewDBS.ReviewDB.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-
+import java.util.Optional;
 
 
 @Entity
@@ -17,6 +14,21 @@ public class Review {
     private String reviewerName;
     private int rating;
     private String reviewText;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false)
+    private Movie movie;
+
+
+
+
+
 
     public long getReviewId() {
         return reviewId;
@@ -58,6 +70,22 @@ public class Review {
         this.reviewText = reviewText;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
     @Override
     public String toString() {
         return "Review{" +
@@ -66,6 +94,8 @@ public class Review {
                 ", reviewerName='" + reviewerName + '\'' +
                 ", rating=" + rating +
                 ", reviewText='" + reviewText + '\'' +
+                ", user=" + user +
+                ", movie=" + movie +
                 '}';
     }
 }

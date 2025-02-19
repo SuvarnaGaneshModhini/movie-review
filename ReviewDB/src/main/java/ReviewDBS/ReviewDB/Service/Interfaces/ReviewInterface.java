@@ -1,6 +1,8 @@
 package ReviewDBS.ReviewDB.Service.Interfaces;
 
+import ReviewDBS.ReviewDB.Dto.ReviewDto;
 import ReviewDBS.ReviewDB.Entity.Review;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -14,4 +16,5 @@ public interface ReviewInterface {
    Review update(Review review, Long id);
 
    String Delete(Long id);
+    ResponseEntity<String> addReview(Long userId, Long movieId, ReviewDto reviewDto);
 }

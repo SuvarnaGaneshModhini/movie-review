@@ -1,6 +1,7 @@
 package ReviewDBS.ReviewDB.Controller;
 
 
+import ReviewDBS.ReviewDB.Dto.ReviewDto;
 import ReviewDBS.ReviewDB.Entity.Review;
 import ReviewDBS.ReviewDB.Service.Interfaces.ReviewInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,10 @@ import java.util.List;
 
 public class ReviewController {
 
-
     @Autowired
     private ReviewInterface reviewInterface;
 
-    @PostMapping("/postreview")
+    @PostMapping("/postrev")
    Review create(@RequestBody Review review){
      return   reviewInterface.create(review);
    }
@@ -51,5 +51,11 @@ public class ReviewController {
         reviewInterface.Delete(id);
         return ResponseEntity.ok("Successfully deleted the data");
     }
+
+    @PostMapping("/post/review")
+    ResponseEntity<String> addReview(@RequestParam long userId, @RequestParam long movieId, @RequestBody ReviewDto reviewDto){
+        return reviewInterface.addReview(userId,movieId,reviewDto);
+    }
+
 
 }
